@@ -44,6 +44,13 @@ public class MainActivity extends AppCompatActivity {
                     Manifest.permission.CAMERA
             }, 100);
         }
+
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+            }, 100);
+        }
     }
 
     @Override
@@ -51,13 +58,13 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
 //        imageView.setImageBitmap((Bitmap) data.getExtras().get("data"));  // works but poor image quality
-
-//        Parcelable[] parcelables = data.getParcelableArrayExtra(data.EXTRA_STREAM);  // doesn't work
-
-//        Parcelable parcelable = data.getParcelableExtra(Intent.EXTRA_STREAM);  // doesn't work
-
-//        imageView.setImageURI(data.getParcelableExtra(Intent.EXTRA_STREAM));  // doesn't work
-        Uri a = data.getData();
-        imageView.setImageURI(data.getData());  // doesn't work
+//
+        Parcelable[] parcelables = data.getParcelableArrayExtra(Intent.EXTRA_STREAM);  // doesn't work
+//
+        Parcelable parcelable = data.getParcelableExtra(Intent.EXTRA_STREAM);  // doesn't work
+//
+        imageView.setImageURI(data.getParcelableExtra(Intent.EXTRA_STREAM));  // doesn't work
+//        Uri uri = data.getData();
+//        imageView.setImageURI(uri);  // doesn't work
     }
 }
